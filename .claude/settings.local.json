@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(chmod +x /Users/arthafck69/Downloads/anniversary-invitation/node_modules/.bin/vite)",
+      "Bash(node -e \"console.log\\(process.arch, process.platform\\)\")",
+      "Bash(npm install *)",
+      "Bash(curl -sf http://localhost:5174/)",
+      "Bash(npx --yes playwright --version)",
+      "Read(//Users/arthafck69/**)",
+      "Read(//Users/arthafck69/Library/Caches/**)",
+      "Bash(npx --yes playwright install chromium --with-deps)"
+    ]
+  }
+}
