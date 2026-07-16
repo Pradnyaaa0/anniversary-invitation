@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary-pink: #ffafcc;
+  --color-soft-pink: #ffe5ec;
+  --color-blush-pink: #ffc2d1;
+  --color-rose-pink: #fb6f92;
+  --color-pastel-pink: #ffccd5;
+  
+  --font-sans: 'Poppins', sans-serif;
+  --font-dancing: 'Dancing Script', cursive;
+  --font-vibes: 'Great Vibes', cursive;
+  
+  --animate-heartbeat: heartbeat 1.5s infinite ease-in-out;
+  --animate-float-slow: float-slow 8s infinite ease-in-out;
+  --animate-float-medium: float-medium 5s infinite ease-in-out;
+  --animate-float-fast: float-fast 3s infinite ease-in-out;
+  --animate-sparkle: sparkle 2s infinite ease-in-out;
+  
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
+  }
+  @keyframes float-medium {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-15px) translateX(-8px) rotate(-6deg); }
+  }
+  @keyframes float-fast {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-10px) translateX(5px) rotate(4deg); }
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+  }
+}
+
+/* Base resets to match Tailwind & provide support for custom layouts */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffe5ec;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #ffe5ec;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffc2d1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffafcc;
+}
+
+/* Selection style */
+::selection {
+  background-color: #ffc2d1;
+  color: #fb6f92;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(251, 111, 146, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 111, 146, 0.25);
+}
+
+/* Overriding Vite styles */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  text-align: left !important;
+  display: block !important;
+  min-height: auto !important;
+}
+
+/* Envelope 3D Fold Styles */
+.envelope-wrapper {
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  width: 400px;
+  height: 280px;
+  background: #ffccd5;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+@media (max-width: 480px) {
+  .envelope {
+    width: 300px;
+    height: 210px;
+  }
+}
+
+.envelope .front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 200px solid #ffafcc;
+  border-bottom: 140px solid #ffafcc;
+  border-left: 200px solid #ffafcc;
+  border-top: 140px solid transparent;
+  border-radius: 0 0 10px 10px;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+}
+
+@media (max-width: 480px) {
+  .envelope .front {
+    border-right-width: 150px;
+    border-bottom-width: 105px;
+    border-left-width: 150px;
+    border-top-width: 105px;
+  }
+}
+
+.envelope .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffccd5;
+  border-radius: 10px;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.envelope .flap {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right: 200px solid transparent;
+  border-top: 145px solid #ff99b6;
+  border-left: 200px solid transparent;
+  border-bottom: 145px solid transparent;
+  transform-origin: top;
+  transition: transform 0.6s ease, z-index 0.3s ease;
+  z-index: 15;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 480px) {
+  .envelope .flap {
+    border-right-width: 150px;
+    border-top-width: 110px;
+    border-left-width: 150px;
+    border-bottom-width: 110px;
+  }
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 2;
+}
+
+.envelope .letter {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  height: 250px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.6s ease;
+  z-index: 5;
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .envelope .letter {
+    height: 190px;
+    padding: 10px;
+  }
+}
+
+.envelope.open .letter {
+  transform: translateY(-130px);
+  z-index: 12;
+}
+
+@media (max-width: 480px) {
+  .envelope.open .letter {
+    transform: translateY(-90px);
+  }
+}
+
+/* Custom Masonry layout fallback if CSS columns is preferred */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* gutter size offset */
+  width: auto;
+}
+.masonry-grid_column {
+  padding-left: 16px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Card Glow Effect on Hover */
+.glow-card:hover {
+  box-shadow: 0 0 25px rgba(251, 111, 146, 0.45);
+}
